@@ -1,0 +1,18 @@
+# Docker
+Dockerfile
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv
+.venv
+
+# IDEs and editors
+.idea/
+.vscode/
+
+.python-version
