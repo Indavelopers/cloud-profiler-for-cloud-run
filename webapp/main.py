@@ -11,8 +11,7 @@ try:
         service='cloud-run-profiler-demo',
         service_version='1.0.0',
         # verbose is the logging level. 0-error, 1-warning, 2-info, 3-debug
-        verbose=3,
-        project_id='cloud-profiler-for-cloud-run')
+        verbose=3)
 except (ValueError, NotImplementedError) as exc:
     print(f'Error: Could not start the profiler: {exc}')
 
