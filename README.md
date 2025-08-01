@@ -36,7 +36,31 @@ For this purpose, a Python Flask webapp will be used.
   - Artifact Registry Administrator
   - Cloud Profiler User
 
+**Important note on dependencies:** The Cloud Profiler Python package supports Python 3.7 to 3.10 ([google-cloud-profiler on PyPI](https://pypi.org/project/google-cloud-profiler/)), so the Dockerfile uses the Python 3.10 base image ([Docker Hub](https://hub.docker.com/_/python)).
+
+Also, for installing the Cloud Profiler Python module you need a C/C++ compiler and development tools installed ([docs](https://cloud.google.com/profiler/docs/profiling-python#using-profiler)), so the `3.10` tag is used instead of the `3.10-slim` tag.
+
 ## Usage
+
+TL;DR:
+
+1. Clone the repo: `git clone https://github.com/Indavelopers/cloud-profiler-for-cloud-run`, `cd cloud-profiler-for-cloud-run/webapp`
+2. Create & activate a Python virtual env: `python3 -m venv venv`, `source venv/bin/activate`
+3. Install dependencies: `pip install -r requirements.txt`
+4. Create a Google Artifact Registry repo named `webapp` in location e.g. `europe-west4`: `gcloud artifacts repositories create webapp --repository-format=docker --location=europe-west4`
+5. Authenticate Docker with Cloud SDK: `gcloud auth configure-docker europe-west4`
+6. Build the container image locally: `docker build -t europe-west4-docker.pkg.dev/cloud-profiler-for-cloud-run/webapp/webapp:latest .`
+7. Push the container image to Google Artifact Registry: `docker push europe-west4-docker.pkg.dev/cloud-profiler-for-cloud-run/webapp/webapp:latest`
+8. Create a Cloud Run service named `webapp` and deploy the app: `gcloud run deploy webapp --region europe-west4 --image europe-west4-docker.pkg.dev/cloud-profiler-for-cloud-run/webapp/webapp:latest --allow-unauthenticated`
+9. Generate some traffic with Locust:
+   1. Install Locust: `pip install locust`
+   2. Substitute Cloud Run service URL in `locustfile.py`:
+   3. Start Locust: `locust -f ../locustfile.py`
+   4. Run Locust for 2-5 minutes.
+10. Check Cloud Profiler in Google Cloud Console
+
+You should see something similar to this (`cloud-profiler-demo.png`):
+![Cloud Profiler demo](cloud-profiler-demo.png)
 
 ## License
 
