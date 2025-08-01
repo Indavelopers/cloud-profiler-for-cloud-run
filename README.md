@@ -52,6 +52,7 @@ TL;DR:
 6. Build the container image locally: `docker build -t europe-west4-docker.pkg.dev/cloud-profiler-for-cloud-run/webapp/webapp:latest .`
 7. Push the container image to Google Artifact Registry: `docker push europe-west4-docker.pkg.dev/cloud-profiler-for-cloud-run/webapp/webapp:latest`
 8. Create a Cloud Run service named `webapp` and deploy the app: `gcloud run deploy webapp --region europe-west4 --image europe-west4-docker.pkg.dev/cloud-profiler-for-cloud-run/webapp/webapp:latest --allow-unauthenticated`
+   1. Optionally, recommended for production: Create a service account, assign the `Cloud Profiler Agent` role to it, and assign the service account to the Cloud Run service
 9. Generate some traffic with Locust:
    1. Install Locust: `pip install locust`
    2. Substitute Cloud Run service URL in `locustfile.py`:
