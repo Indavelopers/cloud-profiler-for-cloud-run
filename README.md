@@ -80,7 +80,5 @@ Please, open an issue, submit a pull request, or generally contact the author by
 
 ## TO-DOs
 
-- Check min Python version for Cloud Profiler (3.11)
-- Check error when installing Cloud Profiler python package from PyPI
 - Check support for Cloud Run functions
 - Check support for Cloud Run jobs
